@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PackageId>SershoCode.TMBF.Core</PackageId>
+		<Version>1.4.2</Version>
+		<Authors>Sersho</Authors>
+		<Company>CreativeCoders</Company>
+		<Description>TelegramBotModuleFramework</Description>
+		<GenerateDocumentationFile>False</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<Target Name="PushNuGetPackage" AfterTargets="GenerateNuspec">
+		<Message Text="Push NuGet Package Feed" Importance="high"></Message>
+		<Exec Command="D:\Development\Nuget\nuget.exe push $(ProjectDir)bin\Release\$(PackageId).$(PackageVersion).nupkg -Source https://gitea.gamefarming.ru/api/packages/RookieRangers/nuget/index.json -ApiKey 115002c8bd66f0cd7eb202a5e0b2c9a8d88c7d56" Condition="'$(Configuration)' == 'Release'"></Exec>
+	</Target>
+
+	<ItemGroup>
+		<PackageReference Include="Hangfire.InMemory" Version="0.8.0" />
+		<PackageReference Include="System.ServiceModel.Primitives" Version="8.0.0" />
+		<PackageReference Include="Telegram.Bot" Version="19.0.0" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />	
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="EntityFramework\Dtos\" />
+	</ItemGroup>
+
+</Project>
